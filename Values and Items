@@ -1,0 +1,29 @@
+--- Sociodemographics----
+SD03 = sex 
+    -> 1 = männlich, 2 = weiblich, 3 = divers 
+SD07 = relationship status 
+    -> 1 = ledig/ohne feste Beziehung, 2 = ledig/feste Beziehung, 3 = verheiratet/eingetragene Lebenspartnerschaft, 4 = getrennt lebend / geschieden / aufgehobene Lebenspartnerschaft, 5 = verwitwet / eingetragene/r Lebenspartner/-in verstorben, 6 = sonstiges, nämlich
+SD08 = professional degree (1 = nicht ausgewählt, 2 = ausgewählt)
+    -> SD08_01 = Ich habe keinen beruflichen Abschluss und bin nicht in beruflicher Ausbildung
+    -> SD08_02 = Ich bin noch in beruflicher Ausbildung (Auszubildende/r, Student/in)
+    -> SD08_03 = Ich habe eine beruflich-betriebliche /-schulische Berufsausbildung abgeschlossen
+    -> SD08_04 = Ich habe eine Ausbildung an einer Fachschule, Meister-, Technikerschule abgeschlossen
+    -> SD08_05 = Bachelor an (Fach-)Hochschule abgeschlossen
+    -> SD08_06 = Fachhochschulabschluss (z. B. Diplom, Master)
+    -> SD08_07 = Universitätsabschluss (z. B. Diplom, Magister, Master, Staatsexamen)
+    -> SD08_08 = Promotion 
+    -> SD08_09 = Ich habe einen anderen beruflichen Abschluss, und zwar
+    -> SD08_09a = offene Eingabe
+SD11 = Qualifications 
+    -> 1 = Rettungshelfer, 2 = Rettungssanitäter, 3 = Rettungsassistent, 4 = Notfallsanitäter, 5 = Anderes, und zwar: 
+SD12 = Employment (1 = nicht gewählt, 2 = ausgewählt) 
+    -> SD12_01 = hauptamtlich beschäftigt? 
+    -> SD12_02 = ehrenamtlich beschäftigt? 
+SD09 = year of entry 
+SD10 = years employed 
+SD13_02 = weekly hours (ehrenamtlich ... Std/Woche)
+
+---NEQ---
+
+
+---Usage Behaviors---
