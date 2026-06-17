@@ -24,6 +24,43 @@ SD10 = years employed
 SD13_02 = weekly hours (ehrenamtlich ... Std/Woche)
 
 ---NEQ---
+NE01_xx = if any NE occured (1 = Nein, 2 = Ja)
+NE03_xx = severity (1 = Gar nicht, 2 = Etwas, 3 = Mittelmäßig, 4 = Stark, 5 = Sehr stark)
+NE04_xx = due to RUPERT (1 = Teilnahme am Programm, 2 = andere Umstände) 
 
+NE04_01 Ich hatte größere Probleme mit meinem Schlaf
+NE04_02 Ich fühlte mich gestresster
+NE04_03 Ich hatte mehr Angst
+NE04_04 Ich wurde unruhiger
+NE04_05 Ich empfand eine große Hoffnungslosigkeit
+NE04_06 Ich erlebte mehr unangenehme Gefühle
+NE04_07 Ich beobachtete, dass sich das, weshalb ich an dem Programm teilnehme, verschlechterte
+NE04_08 Ich erlebte, dass alte, unangenehme Erinnerungen wieder hochkamen
+NE04_09 Ich bekam Angst, dass andere Menschen ahnen könnten, dass ich an einem Informations- und Austauschprogramm gegen Depression teilnehme
+NE04_10 Ich bekam Gedanken, dass es besser wäre, wenn ich nicht mehr da wäre, oder dass ich mir das Leben nehmen sollte
+NE04_11 Ich begann, mich vor anderen dafür zu schämen, dass ich an einem Informations- und Austauschprogramm gegen Depression teilnehme
+NE04_12 Ich hörte auf zu glauben, dass die Dinge besser werden können
+NE04_13 Ich begann zu glauben, dass das, weswegen ich an dem Programm teilnehme, nicht zum Besseren beeinflusst werden kann
+NE04_14 Ich scheine eine Abhängigkeit von dem Informations- und Austauschprogramm gegen Depression entwickelt zu haben
+NE04_15 Ich scheine eine Abhängigkeit von dem Online-Diskussionsforum Depression entwickelt zu haben
+NE04_16 Ich habe das, was im Rahmen des Informations- und Austauschprogramm gegen Depression angeboten wurde, nicht immer verstanden
+NE04_17 Ich habe den Experten/die Expertin im Expertenchat nicht immer verstanden
+NE04_18 Ich hatte kein Vertrauen in das Informations- und Austauschprogramm gegen Depression
+NE04_19 Ich hatte das Gefühl, dass das Programm nichts gebracht hat
+NE04_20 Ich hatte nicht das Gefühl, dass meine Erwartungen an den Experten/die Expertin im Expertenchat erfüllt wurde
+NE04_21 Ich fand, das Informations- und Austauschprogramm gegen Depression war demotivierend
 
 ---Usage Behaviors---
+(1 = nicht gewählt, 2 = ausgewählt) 
+UF01_01 = Landingpage (Website "RUPERT) 
+UF01_02 = Informationsplatform (geschützer Bereich "RUPERT") 
+UF01_03 = Diskussionsforum 
+UF01_04 = Expertenchats 
+
+UF02_01 = Info_usagetime: ca. ... Stunde(n)/Woche 
+UF04_01 = Forum_usagetime: ca. ... Stunde(n)/Woche 
+
+Usefulness? 
+
+
+
