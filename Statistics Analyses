@@ -1,0 +1,12 @@
+--- Frequencies ---
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+
+items_NEQ01 <- paste0("NE01_", sprintf("%02d", 1:21))
+
+rupert26_t1 <- RUPERT26 %>%
+filter(Time == "T1") %>% 
+summarise(across(all_of(items_NEQ01), ~ sum(. == 2, na.rm = TRUE))) %>%
+pivot_longer(cols = everything(), names_to = "Item",values_to = "Yes_t1")
+
