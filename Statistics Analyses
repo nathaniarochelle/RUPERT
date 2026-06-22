@@ -53,3 +53,27 @@ RUPERT26 <- RUPERT26 %>%
   mutate(
     NEQ04_yes_count = rowSums(across(all_of(items_NEQ04), ~ . == 1), na.rm = TRUE),
     NEQ04_any_yes = if_else(NEQ04_yes_count > 0, 1, 0))
+
+--- Severity (NEQ03) --- 
+rupert26_NEQ03_descriptives <- RUPERT26 %>%
+  group_by(Time) %>%   # ✅ keeps T1 and T2 together
+  summarise(
+    across(
+      all_of(items_NEQ03),
+      list(
+        Mean = ~ mean(.x, na.rm = TRUE),
+        SD   = ~ sd(.x, na.rm = TRUE),
+        Min  = ~ min(.x, na.rm = TRUE),
+        Max  = ~ max(.x, na.rm = TRUE),
+        N    = ~ sum(!is.na(.x))
+      ),
+      .names = "{.col}__{.fn}"
+    ),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(
+    cols = -Time,
+    names_to = c("Item", ".value"),
+    names_sep = "__"
+  ) %>%
+  arrange(Time, Item)
