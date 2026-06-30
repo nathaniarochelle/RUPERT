@@ -11,6 +11,8 @@ by = c("CASE" = "Count"))
 
 --- Sociodemographics descriptives ---
 
+library(dplyr)
+
 #SEX
 RUPERT_join %>%
 filter(Time %in% c("T0"),
@@ -25,18 +27,90 @@ state %in% c(0, 1)) %>%
 count(SD07) %>%
 mutate(percent = n / sum(n) * 100)
 
-#Hauptamtlich/Ehrenamtlich Status
+RUPERT_join_f %>%
+filter(Time %in% c("T1"),
+state %in% c(0, 1)) %>%
+count(SD07) %>%
+mutate(percent = n / sum(n) * 100)
+
+#PROFESSIONAL DEGREE
+RUPERT_join %>%
+filter(
+Time == "T0",
+state %in% c(0, 1)
+) %>%
+summarise(
+across(
+c(SD08, SD08_01, SD08_02, SD08_03, SD08_04,
+SD08_05, SD08_06, SD08_07, SD08_08, SD08_09),
+~ sum(. == 2, na.rm = TRUE)
+)
+) %>%
+pivot_longer(
+everything(),
+names_to = "Item",
+values_to = "Frequency_Yes")
+
+RUPERT_join_f %>%
+filter(
+Time == "T1",
+state %in% c(0, 1)
+) %>%
+summarise(
+across(
+c(SD08, SD08_01, SD08_02, SD08_03, SD08_04,
+SD08_05, SD08_06, SD08_07, SD08_08, SD08_09),
+~ sum(. == 2, na.rm = TRUE)
+)
+) %>%
+pivot_longer(
+everything(),
+names_to = "Item",
+values_to = "Frequency_Yes")
+
+#QUALIFICATIONS
+RUPERT_join %>%
+filter(Time %in% c("T0"),
+state %in% c(0, 1)) %>%
+count(SD11) %>%
+mutate(percent = n / sum(n) * 100)
+
+RUPERT_join_f %>%
+filter(Time %in% c("T1"),
+state %in% c(0, 1)) %>%
+count(SD11) %>%
+mutate(percent = n / sum(n) * 100)
+
+#HAUPTAMTLICH7EHRENAMTLICH STATUS
 RUPERT_join %>%
 filter(Time %in% c("T0"),
 state %in% c(0, 1)) %>%
 count(SD12_01) %>%
 mutate(percent = n / sum(n) * 100)
 
-#Mean Age
+RUPERT_join %>%
+filter(Time %in% c("T0"),
+state %in% c(0, 1)) %>%
+count(SD12_02) %>%
+mutate(percent = n / sum(n) * 100)
+
+RUPERT_join_f %>%
+filter(Time %in% c("T1"),
+state %in% c(0, 1)) %>%
+count(SD12_01) %>%
+mutate(percent = n / sum(n) * 100)
+
+RUPERT_join_f %>%
+filter(Time %in% c("T1"),
+state %in% c(0, 1)) %>%
+count(SD12_02) %>%
+mutate(percent = n / sum(n) * 100)
+
+#MEAN AGE
 RUPERT_join %>%
 filter(Time == "T0",
 state %in% c(0, 1)) %>%
-mutate(SD_age = as.numeric(as.character(SD_age))) %>%   # ✅ FIX
+mutate(SD_age = as.numeric(as.character(SD_age))) %>%   
 summarise(
 total_n   = n(),
 n_age     = sum(!is.na(SD_age)),
@@ -48,13 +122,46 @@ all(is.na(SD_age)),
 NA,
 paste0(
 min(SD_age, na.rm = TRUE), " - ",
-max(SD_age, na.rm = TRUE)
-)
-)
-)
+max(SD_age, na.rm = TRUE))))
 
-#Years of Experience 
+#YEARS OF EXPERIENCE
+ RUPERT_join %>%
+filter(
+Time == "T0",
+state %in% c(0, 1)
+) %>%
+mutate(SD10_01 = as.numeric(as.character(SD10_01))) %>%
+summarise(
+total_n      = n(),
+n_SD10_01    = sum(!is.na(SD10_01)),
+n_missing    = sum(is.na(SD10_01)),
+mean_SD10_01 = mean(SD10_01, na.rm = TRUE),
+sd_SD10_01   = sd(SD10_01, na.rm = TRUE),
+range_SD10_01 = ifelse(
+all(is.na(SD10_01)),
+NA,
+paste0(
+ min(SD10_01, na.rm = TRUE), " - ",
+max(SD10_01, na.rm = TRUE))))
 
+RUPERT_join_f %>%
+filter(
+Time == "T1",
+state %in% c(0, 1)
+) %>%
+mutate(SD10_01 = as.numeric(as.character(SD10_01))) %>%
+summarise(
+total_n      = n(),
+n_SD10_01    = sum(!is.na(SD10_01)),
+n_missing    = sum(is.na(SD10_01)),
+mean_SD10_01 = mean(SD10_01, na.rm = TRUE),
+sd_SD10_01   = sd(SD10_01, na.rm = TRUE),
+range_SD10_01 = ifelse(
+all(is.na(SD10_01)),
+NA,
+paste0(
+min(SD10_01, na.rm = TRUE), " - ",
+max(SD10_01, na.rm = TRUE))))
 
 
 --- Frequencies + Descriptives (NEQ) ---
