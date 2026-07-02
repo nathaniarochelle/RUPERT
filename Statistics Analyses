@@ -316,3 +316,20 @@ family = binomial
 )
 
 > summary(RQ3_T1_join)
+
+t2_rupert_RQ3 <- RUPERT_join_f %>%
+filter(state %in% c(0, 1), Time == "T2") %>%
+select(Participant_ID, NEQ04_any_yes)
+
+> data_RQ3_t2 <- left_join(t2_rupert_RQ3, baseline_rupert_RQ3, by = "Participant_ID")
+
+RQ3_T2_join <- glm(
+NEQ04_any_yes ~ SD_age + sex + SD10_01,
+data = data_RQ3_t2 %>%
+mutate(
+SD_age  = as.numeric(as.character(SD_age)),
+SD10_01 = as.numeric(as.character(SD10_01))
+),
+family = binomial(link = "logit")
+)
+> summary(RQ3_T2_join)
