@@ -269,7 +269,7 @@ names_sep = "__"
 ) %>%
 arrange(Time, Item)
 
--- Severity due to rupert ---
+-- Severity due to rupert --
 
 library(purrr)
 
@@ -282,6 +282,23 @@ RUPERT_join %>%
 filter(
 state %in% c(0, 1),      # keep only State 0 and 1
 .data[[neq04_var]] == 1  # item-specific intervention filter
+) %>%
+group_by(Time) %>%
+summarise(
+Item = neq03_var,
+Mean = mean(as.numeric(.data[[neq03_var]]), na.rm = TRUE),
+SD   = sd(as.numeric(.data[[neq03_var]]), na.rm = TRUE),
+Min  = min(as.numeric(.data[[neq03_var]]), na.rm = TRUE),
+Max  = max(as.numeric(.data[[neq03_var]]), na.rm = TRUE),
+N    = sum(!is.na(.data[[neq03_var]])),
+.groups = "drop"
+)})
+
+-- Severity due to other situations -- 
+RUPERT_join %>%
+filter(
+state %in% c(0, 1),      # keep only State 0 and 1
+.data[[neq04_var]] == 2  # item-specific intervention filter
 ) %>%
 group_by(Time) %>%
 summarise(
