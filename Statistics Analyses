@@ -13,7 +13,7 @@
 #   RUPERT_join_f  [short description]
 #
 # Coding: checkbox items (SD08, SD12, UF01): 1 = not selected, 2 = selected
-#         NE01: 1 = no, 2 = yes | NE03: 1-5 severity | NE04: 1 = due to RUPERT, 2 = other
+#         NE01: 1 = no, 2 = yes | NE03: 1-5 Negative Impact | NE04: 1 = due to RUPERT, 2 = other
 
 
 
@@ -257,9 +257,9 @@ others        = sum(Response == 2, na.rm = TRUE),
 
 
 
-#----------- Severity (NEQ03) --- ----------------------------------------------------
+#----------- Negative Impact (NEQ03) --- ----------------------------------------------------
 
-# Mean, SD, min, max and N of each severity item per timepoint (state 0/1 only),
+# Mean, SD, min, max and N of each Negative Impact item per timepoint (state 0/1 only),
 # reshaped into a long table with one row per timepoint and item.
 
 
@@ -290,11 +290,11 @@ arrange(Time, Item)
 
 
 
-#--------- Severity due to RUPERT -------------------------------------------------
+#--------- Negative Impact due to RUPERT -------------------------------------------------
 
 
 # For each item, restrict to cases where the negative effect was attributed to the
-# intervention (NE04 == 1) and compute severity descriptives (mean, SD, min, max, N)
+# RUPERT (NE04 == 1) and compute Negative Impact descriptives (mean, SD, min, max, N)
 # per timepoint, for state 0/1 only.
 
 
@@ -322,10 +322,10 @@ N    = sum(!is.na(.data[[neq03_var]])),
 
 
 
-#--------- Severity due to other situations ------------------------------------------------
+#--------- Negative Impact due to other situations ------------------------------------------------
 
 # For each item, restrict to cases where the negative effect was attributed to other
-# situations (NE04 == 2) and compute severity descriptives (mean, SD, min, max, N)
+# situations (NE04 == 2) and compute Negative Impact descriptives (mean, SD, min, max, N)
 # per timepoint, again for state 0/1 only.
 
 RUPERT_join %>%
@@ -351,7 +351,7 @@ N    = sum(!is.na(.data[[neq03_var]])),
 #--------- RQ3 -----------------------------------------------------------------------------
 
 # Logistic regression: do age, sex and years of experience (measured at T0) predict
-# whether at least one negative effect was attributed to the intervention
+# whether at least one negative effect was attributed to RUPERT
 # (NEQ04_any_yes) at T1 and T2? One model per timepoint, state 0/1 only.
 
 
