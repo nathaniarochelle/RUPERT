@@ -213,8 +213,7 @@ max(SD10_01, na.rm = TRUE))))
 
 #-------- Frequencies + Descriptives (NEQ) ---------------------------------------------
 
-# Frequencies of reported negative effects (NE01) and of their attribution to the
-# program or to other circumstances (NE04) per item and timepoint.
+# Frequencies of reported negative effects (NE01) and of their attribution to RUPERT or to other circumstances (NE04) per item and timepoint.
 
 
 RUPERT_join_f <- RUPERT_join_f %>%
