@@ -22,7 +22,7 @@ RUPERT is a digital peer support and psychoeducation platform against depression
 
 | File | Description |
 | ---- | ----------- |
-| `[Statistics Analyses.txt]` | Statistical analyses: data cleaning and joining, sociodemographic descriptives, NEQ frequencies and severity, binary coding of negative effects and logistic regressions (RQ3). |
+| `[Statistics Analyses.txt]` | Statistical analyses: data cleaning and joining, sociodemographic descriptives, NEQ frequencies and negative impact, binary coding of negative effects and logistic regressions (RQ3). |
 | `[Values and Items.txt]` | Values and items: description of all variables used in the script, with response codes (e.g. 1 = not selected, 2 = selected) and the item wording of the 21 NEQ items. |
 
 
@@ -56,7 +56,7 @@ Values of `state`:
 
 1. **Data cleaning and joining:** merge of the original data with the corrected HR dataset.
 2. **Sociodemographics:** sex, relationship status, professional degree, qualifications, employment status, age and years of experience at T0 and T1.
-3. **RQ1:** Frequencies of reported negative effects after the use of the RUPERT intervention (NE01) and of their attribution to the program or to other circumstances (NE04), per item at T1 and T2. Severity ratings (NE03) are described overall and separately by attribution.
+3. **RQ1:** Frequencies of reported negative effects after the use of the RUPERT intervention (NE01) and of their attribution to the program or to other circumstances (NE04), per item at T1 and T2. Negative Impact ratings (NE03) are described overall and separately by attribution.
 4. **RQ2:** If any negative effects were observed at T1, do they persist at T2? Are there delayed negative effects that were not present at T1, but present at T2?
 5. **RQ3:** To what extent are negative effects associated with age, gender, and years of experience? Logistic regressions with age, sex and years of experience (T0) as predictors of reporting at least one negative effect attributed to the program, separately for T1 and T2.
 
@@ -84,7 +84,7 @@ Full version in `Values and Items.txt`.
 | Variable | Content | Coding |
 | -------- | ------- | ------ |
 | `NE01_xx` | Did the negative effect occur? | 1 = no, 2 = yes |
-| `NE03_xx` | Severity | 1 = not at all, 2 = slightly, 3 = moderately, 4 = severely, 5 = very severely |
+| `NE03_xx` | Negative Impact | 1 = not at all, 2 = slightly, 3 = moderately, 4 = severely, 5 = very severely |
 | `NE04_xx` | Cause | 1 = participation in the program, 2 = other circumstances |
 
 
