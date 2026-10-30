@@ -1,6 +1,40 @@
---- Data cleaning and joining --- 
+#---------- RUPERT Data-Analysis -----------------------------------------------------------
+#-------------------------------------------------------------------------------------------
 
-Original data set + HR's version (korrigiert mit Variable State!) 
+
+
+# Analysis of sociodemographics and negative effects (Negative Effects Questionnaire,
+# NEQ) at T0, T1 and T2.
+#
+# Expects the following objects in the R session (data are not part of the repository):
+#   RUPERT_ori  original survey export (ID variable CASE)
+#   RUPERT_HR   corrected dataset with state, Participant_ID, Time, sex (ID variable Count)
+#   RUPERT26    [short description]
+#   RUPERT_join_f  [short description]
+#
+# Coding: checkbox items (SD08, SD12, UF01): 1 = not selected, 2 = selected
+#         NE01: 1 = no, 2 = yes | NE03: 1-5 severity | NE04: 1 = due to RUPERT, 2 = other
+
+
+
+#--------- Packages ------------------------------------------------------------------------
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(purrr)
+
+
+
+
+
+#--------- Data cleaning and joining -------------------------------------------------------
+
+
+# Convert the ID in the original dataset to character and left-join the corrected
+# HR dataset (adds state, Participant_ID, Time, sex) via CASE = Count.
+# state is the corrected status variable used later to filter participants (0/1).
+
+ 
 RUPERT_join <- RUPERT_ori %>%
 mutate(CASE = as.character(CASE)) %>%   
 left_join(
@@ -9,18 +43,27 @@ mutate(Count = as.character(Count)) %>%
 select(Count, state, Participant_ID, Time, sex),
 by = c("CASE" = "Count"))
 
---- Sociodemographics descriptives ---
 
-library(dplyr)
 
-#SEX
+
+#--------- Sociodemographics descriptives ---------------------------------------------------
+
+
+# Frequencies/percentages for sex, relationship status, professional degree,
+# qualifications and employment status (paid/voluntary) at T0 and T1,
+# plus mean, SD and range of age and years of experience (T0, T1). State 0/1 participants only.
+
+
+#SEX (T0)
 RUPERT_join %>%
 filter(Time %in% c("T0"),
 state %in% c(0, 1)) %>%
 count(sex) %>%
 mutate(percent = n / sum(n) * 100)
 
-#RELATIONSHIP STATUS 
+
+
+#RELATIONSHIP STATUS (T0, T1)
 RUPERT_join %>%
 filter(Time %in% c("T0"),
 state %in% c(0, 1)) %>%
@@ -33,7 +76,9 @@ state %in% c(0, 1)) %>%
 count(SD07) %>%
 mutate(percent = n / sum(n) * 100)
 
-#PROFESSIONAL DEGREE
+
+
+#PROFESSIONAL DEGREE (T0, T1)
 RUPERT_join %>%
 filter(
 Time == "T0",
@@ -68,7 +113,7 @@ everything(),
 names_to = "Item",
 values_to = "Frequency_Yes")
 
-#QUALIFICATIONS
+#QUALIFICATIONS (T0, T1)
 RUPERT_join %>%
 filter(Time %in% c("T0"),
 state %in% c(0, 1)) %>%
@@ -81,8 +126,8 @@ state %in% c(0, 1)) %>%
 count(SD11) %>%
 mutate(percent = n / sum(n) * 100)
 
-#HAUPTAMTLICH7EHRENAMTLICH STATUS
-library(dplyr)
+
+#HAUPTAMTLICH7EHRENAMTLICH STATUS (T0, T1): paid and/or voluntary employment
 
 RUPERT_join %>%
   filter(state %in% c(0, 1), Time == "T0") %>%
@@ -104,7 +149,8 @@ RUPERT_join_f %>%
     Yes_at_least_one = sum(SD12_01 == 2 | SD12_02 == 2, na.rm = TRUE)
   )
 
-#MEAN AGE
+
+#MEAN AGE (T0)
 RUPERT_join %>%
 filter(Time == "T0",
 state %in% c(0, 1)) %>%
@@ -122,7 +168,8 @@ paste0(
 min(SD_age, na.rm = TRUE), " - ",
 max(SD_age, na.rm = TRUE))))
 
-#YEARS OF EXPERIENCE
+
+#YEARS OF EXPERIENCE (T0, T1)
  RUPERT_join %>%
 filter(
 Time == "T0",
@@ -162,12 +209,14 @@ min(SD10_01, na.rm = TRUE), " - ",
 max(SD10_01, na.rm = TRUE))))
 
 
---- Frequencies + Descriptives (NEQ) ---
-library(tidyr)
-library(ggplot2)
-library(dplyr)
 
---- Binary coding of frequencies ---
+
+#-------- Frequencies + Descriptives (NEQ) ---------------------------------------------
+
+# Frequencies of reported negative effects (NE01) and of their attribution to the
+# program or to other circumstances (NE04) per item and timepoint.
+
+
 RUPERT_join_f <- RUPERT_join_f %>%
   mutate(
     NEQ01_yes_count = rowSums(across(all_of(items_NEQ01), ~ . == 2), na.rm = TRUE),
@@ -206,7 +255,16 @@ due_to_rupert = sum(Response == 1, na.rm = TRUE),
 others        = sum(Response == 2, na.rm = TRUE),
 .groups = "drop")
 
---- Severity (NEQ03) --- 
+
+
+
+#----------- Severity (NEQ03) --- ----------------------------------------------------
+
+# Mean, SD, min, max and N of each severity item per timepoint (state 0/1 only),
+# reshaped into a long table with one row per timepoint and item.
+
+
+
 rupert26_NEQ03_descriptives_join <- RUPERT_join_f %>%
 filter(state %in% c(0, 1)) %>%   # keep only state 0 and 1
 group_by(Time) %>%
@@ -231,9 +289,15 @@ names_sep = "__"
 ) %>%
 arrange(Time, Item)
 
--- Severity due to rupert --
 
-library(purrr)
+
+#--------- Severity due to RUPERT -------------------------------------------------
+
+
+# For each item, restrict to cases where the negative effect was attributed to the
+# intervention (NE04 == 1) and compute severity descriptives (mean, SD, min, max, N)
+# per timepoint, for state 0/1 only.
+
 
 rupert26_NEQ03_intervention_join <- map_dfr(seq_along(items_NEQ03), function(i) {
     
@@ -256,7 +320,15 @@ N    = sum(!is.na(.data[[neq03_var]])),
 .groups = "drop"
 )})
 
--- Severity due to other situations -- 
+
+
+
+#--------- Severity due to other situations ------------------------------------------------
+
+# For each item, restrict to cases where the negative effect was attributed to other
+# situations (NE04 == 2) and compute severity descriptives (mean, SD, min, max, N)
+# per timepoint, again for state 0/1 only.
+
 RUPERT_join %>%
 filter(
 state %in% c(0, 1),      # keep only State 0 and 1
@@ -273,11 +345,24 @@ N    = sum(!is.na(.data[[neq03_var]])),
 .groups = "drop"
 )})
 
---- RQ3 ---
+
+
+
+
+#--------- RQ3 -----------------------------------------------------------------------------
+
+# Logistic regression: do age, sex and years of experience (measured at T0) predict
+# whether at least one negative effect was attributed to the intervention
+# (NEQ04_any_yes) at T1 and T2? One model per timepoint, state 0/1 only.
+
+
+# Baseline predictors (T0)
 baseline_rupert_RQ3 <- RUPERT_join_f %>%
 filter(state %in% c(0, 1), Time == "T0") %>%
 select(Participant_ID, SD_age, sex, SD10_01)
 
+
+# T1
 > t1_rupert_RQ3 <- RUPERT_join_f %>%
 filter(state %in% c(0, 1), Time == "T1") %>%
 select(Participant_ID, NEQ04_any_yes)
@@ -296,6 +381,8 @@ family = binomial
 
 > summary(RQ3_T1_join)
 
+
+# T2
 t2_rupert_RQ3 <- RUPERT_join_f %>%
 filter(state %in% c(0, 1), Time == "T2") %>%
 select(Participant_ID, NEQ04_any_yes)
