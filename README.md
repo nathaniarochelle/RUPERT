@@ -47,7 +47,7 @@ Both are merged by `CASE = Count` into `RUPERT_join`. Only participants with `st
 
 1. **Data cleaning and joining:** merge of the original data with the corrected HR dataset.
 2. **Sociodemographics:** sex, relationship status, professional degree, qualifications, employment status, age and years of experience at T0 and T1.
-3. **Negative effects (NEQ):** frequencies of reported negative effects (NE01), attribution to the program or to other circumstances (NE04) and severity ratings (NE03) per time point.
+3. **Negative effects (NEQ):** frequencies of reported negative effects (NE01), attribution to the program or to other circumstances (NE04) and negative impact ratings (NE03) per time point.
 4. **Binary coding:** per participant, whether at least one negative effect was reported or attributed to the program.
 5. **RQ3:** logistic regressions with age, sex and years of experience as predictors of reporting at least one negative effect attributed to the program, separately for T1 and T2. [Add RQ1 and RQ2 if applicable.]
 
