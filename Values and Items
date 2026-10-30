@@ -49,13 +49,3 @@ NE04_18 Ich hatte kein Vertrauen in das Informations- und Austauschprogramm gege
 NE04_19 Ich hatte das Gefühl, dass das Programm nichts gebracht hat
 NE04_20 Ich hatte nicht das Gefühl, dass meine Erwartungen an den Experten/die Expertin im Expertenchat erfüllt wurde
 NE04_21 Ich fand, das Informations- und Austauschprogramm gegen Depression war demotivierend
-
----Usage Behaviors---
-(1 = nicht gewählt, 2 = ausgewählt) 
-UF01_01 = Landingpage (Website "RUPERT) 
-UF01_02 = Informationsplatform (geschützer Bereich "RUPERT") 
-UF01_03 = Diskussionsforum 
-UF01_04 = Expertenchats 
-
-UF02_01 = Info_usagetime: ca. ... Stunde(n)/Woche 
-UF04_01 = Forum_usagetime: ca. ... Stunde(n)/Woche 
