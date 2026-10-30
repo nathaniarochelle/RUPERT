@@ -39,7 +39,16 @@ The script expects the following data frames:
 | `RUPERT_ori` | Original survey export, one row per participant and time point, ID variable `CASE`. |
 | `RUPERT_HR` | Corrected version with the additional variables `state`, `Participant_ID`, `Time` and `sex`, ID variable `Count`. |
 
-Both are merged by `CASE = Count` into `RUPERT_join`. Only participants with `state` 0 or 1 are included in the analyses. [Explain what state 0, 1 and other values mean.]
+Both are merged by `CASE = Count` into `RUPERT_join`. Only participants with `state` 0 or 1 are included in the analyses. 
+
+Values of `state`:
+
+| Value | Meaning |
+| ----- | ------- |
+| 0 | [to be added] |
+| 1 | [to be added] |
+| 2 | implausible |
+| 3 | duplicate |
 
 
 
@@ -47,9 +56,9 @@ Both are merged by `CASE = Count` into `RUPERT_join`. Only participants with `st
 
 1. **Data cleaning and joining:** merge of the original data with the corrected HR dataset.
 2. **Sociodemographics:** sex, relationship status, professional degree, qualifications, employment status, age and years of experience at T0 and T1.
-3. **Negative effects (NEQ):** frequencies of reported negative effects (NE01), attribution to the program or to other circumstances (NE04) and negative impact ratings (NE03) per time point.
-4. **Binary coding:** per participant, whether at least one negative effect was reported or attributed to the program.
-5. **RQ3:** logistic regressions with age, sex and years of experience as predictors of reporting at least one negative effect attributed to the program, separately for T1 and T2. [Add RQ1 and RQ2 if applicable.]
+3. **RQ1:** Frequencies of reported negative effects after the use of the RUPERT intervention (NE01) and of their attribution to the program or to other circumstances (NE04), per item at T1 and T2. Severity ratings (NE03) are described overall and separately by attribution.
+4. **RQ2:** If any negative effects were observed at T1, do they persist at T2? Are there delayed negative effects that were not present at T1, but present at T2?
+5. **RQ3:** To what extent are negative effects associated with age, gender, and years of experience? Logistic regressions with age, sex and years of experience (T0) as predictors of reporting at least one negative effect attributed to the program, separately for T1 and T2.
 
 
 ## Codebook (short version)
