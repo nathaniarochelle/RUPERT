@@ -69,7 +69,7 @@ Full version in `Values and Items.txt`.
 
 | Variable | Content | Coding |
 | -------- | ------- | ------ |
-| `SD03` | Sex | 1 = male, 2 = female, 3 = diverse |
+| `SD03` | Gender | 1 = male, 2 = female, 3 = diverse |
 | `SD07` | Relationship status | 1 = single, no relationship; 2 = single, in a relationship; 3 = married / registered partnership; 4 = separated / divorced / partnership dissolved; 5 = widowed; 6 = other |
 | `SD08_01` to `SD08_09` | Professional degree (checkboxes) | 1 = not selected, 2 = selected |
 | `SD08_09a` | Other degree | open text |
