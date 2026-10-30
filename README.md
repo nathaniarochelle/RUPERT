@@ -6,7 +6,7 @@ Analysis code for the RUPERT study:
 
 Rochelle, N. S. ([ORCID](https://orcid.org/0009-0000-4794-5974)), Zimdahl, M., Blume, A., Bell, S., Lukersmith, S., Niedermeier, N., & Reich, H. ([ORCID](https://orcid.org/0000-0002-9577-1144))
 
-German Foundation for Depression and Suicide Prevention, Leipzig · Goethe University Frankfurt · Diskussionsforum Depression e.V., Leipzig
+German Foundation for Depression and Suicide Prevention, Leipzig · Goethe University Frankfurt · Diskussionsforum Depression e.V., Leipzig · University of Canberra
 
 Trial registration: [DRKS00029917](https://www.drks.de/DRKS00029917)
 
