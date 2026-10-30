@@ -87,14 +87,6 @@ Full version in `Values and Items.txt`.
 | `NE03_xx` | Severity | 1 = not at all, 2 = slightly, 3 = moderately, 4 = severely, 5 = very severely |
 | `NE04_xx` | Cause | 1 = participation in the program, 2 = other circumstances |
 
-### Usage behavior
-
-| Variable | Content | Coding |
-| -------- | ------- | ------ |
-| `UF01_01` to `UF01_04` | Components used: landing page, information platform, discussion forum, expert chats | 1 = not selected, 2 = selected |
-| `UF02_01` | Hours per week on the information platform | |
-| `UF04_01` | Hours per week in the forum | |
-
 
 ## How to reproduce
 
