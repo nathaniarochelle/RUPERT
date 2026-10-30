@@ -167,42 +167,17 @@ library(tidyr)
 library(ggplot2)
 library(dplyr)
 
-items_NEQ01 <- paste0("NE01_", sprintf("%02d", 1:21))
+--- Binary coding of frequencies ---
+RUPERT_join_f <- RUPERT_join_f %>%
+  mutate(
+    NEQ01_yes_count = rowSums(across(all_of(items_NEQ01), ~ . == 2), na.rm = TRUE),
+    NEQ01_any_yes = if_else(NEQ01_yes_count > 0, 1, 0)
+  )
 
-rupert26_t1 <- RUPERT26 %>%
-filter(Time == "T1") %>% 
-summarise(across(all_of(items_NEQ01), ~ sum(. == 2, na.rm = TRUE))) %>%
-pivot_longer(cols = everything(), names_to = "Item",values_to = "Yes_t1")
-
-rupert26_t2 <- RUPERT26 %>%
-filter(Time == "T2") %>% 
-summarise(across(all_of(items_NEQ01), ~ sum(. == 2, na.rm = TRUE))) %>%
-pivot_longer(cols = everything(), names_to = "Item", values_to = "Yes_t2")
-
-rupert26_freq <- left_join(rupert26_t1, rupert26_t2, by = "Item")
-
-rupert26_freq_NEQ01 <- RUPERT26 %>%
-pivot_longer(cols = all_of(items_NEQ01),
-names_to = "Item",
-values_to = "Response"
-) %>%
-group_by(Time, Item) %>%
-summarise(
-n_NE  = sum(Response == 1, na.rm = TRUE),
-y_NE = sum(Response == 2, na.rm = TRUE),
-.groups = "drop")
-
-rupert26_freq_NEQ04 <- RUPERT26 %>%
-  pivot_longer(
-    cols = all_of(items_NEQ04),
-    names_to = "Item",
-    values_to = "Response"
-  ) %>%
-  group_by(Time, Item) %>%
-  summarise(
-    due_to_rupert = sum(Response == 1, na.rm = TRUE),
-    others        = sum(Response == 2, na.rm = TRUE),
-    .groups = "drop"
+RUPERT_join_f <- RUPERT_join_f %>%
+  mutate(
+    NEQ04_yes_count = rowSums(across(all_of(items_NEQ04), ~ . == 1), na.rm = TRUE),
+    NEQ04_any_yes = if_else(NEQ04_yes_count > 0, 1, 0)
   )
 
 rupert26_freq_NEQ01_join <- RUPERT_join %>%
@@ -230,17 +205,6 @@ summarise(
 due_to_rupert = sum(Response == 1, na.rm = TRUE),
 others        = sum(Response == 2, na.rm = TRUE),
 .groups = "drop")
-
---- Binary coding of frequencies ---
-RUPERT26 <- RUPERT26 %>%
-mutate(
-NEQ01_yes_count = rowSums(across(all_of(items_NEQ01), ~ . == 2), na.rm = TRUE),
-NEQ01_any_yes = if_else(NEQ01_yes_count > 0, 1, 0))
-
-RUPERT26 <- RUPERT26 %>%
-  mutate(
-    NEQ04_yes_count = rowSums(across(all_of(items_NEQ04), ~ . == 1), na.rm = TRUE),
-    NEQ04_any_yes = if_else(NEQ04_yes_count > 0, 1, 0))
 
 --- Severity (NEQ03) --- 
 rupert26_NEQ03_descriptives_join <- RUPERT_join_f %>%
