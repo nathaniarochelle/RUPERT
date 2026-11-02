@@ -368,7 +368,8 @@ select(Participant_ID, NEQ04_any_yes)
 
 > data_RQ3 <- left_join(t1_rupert_RQ3, baseline_rupert_RQ3, by = "Participant_ID")
 
-RQ3_T1_join <- glm(
+sex as numerical: 
+((((RQ3_T1_join <- glm(
 NEQ04_any_yes ~ SD_age + sex + SD10_01,
 data = data_RQ3 %>%
 mutate(
@@ -378,7 +379,36 @@ SD10_01 = as.numeric(as.character(SD10_01))
 family = binomial
 )
 
-> summary(RQ3_T1_join)
+> summary(RQ3_T1_join)))))
+
+gender as categorical: 
+RQ3_T1_join1 <- left_join(
+  t1_rupert_RQ3,
+  baseline_rupert_RQ3,
+  by = "Participant_ID"
+) %>%
+  filter(sex %in% c(1, 2)) %>%  # exclude "other" category
+  mutate(
+    sex = factor(sex,
+                 levels = c(1, 2),
+                 labels = c("Male", "Female")),
+    SD_age = as.numeric(as.character(SD_age)),
+    SD10_01 = as.numeric(as.character(SD10_01))
+  ) %>%
+  glm(
+    NEQ04_any_yes ~ SD_age + sex + SD10_01,
+    data = .,
+    family = binomial
+  )
+
+summary(RQ3_T1_join1)
+
+# Calucalting Odds Ratio 
+exp(cbind(
+  OR = coef(RQ3_T1_join1),
+  confint(RQ3_T1_join1)
+))
+
 
 
 # T2
@@ -398,3 +428,30 @@ SD10_01 = as.numeric(as.character(SD10_01))
 family = binomial(link = "logit")
 )
 > summary(RQ3_T2_join)
+
+gender as categorical: 
+RQ3_T2_join1 <- data_RQ3_t2 %>%
+  filter(sex %in% c(1, 2)) %>%   # exclude "Other"
+  mutate(
+    sex = factor(sex,
+                 levels = c(1, 2),
+                 labels = c("Male", "Female")),
+    SD_age = as.numeric(as.character(SD_age)),
+    SD10_01 = as.numeric(as.character(SD10_01))
+  ) %>%
+  glm(
+    NEQ04_any_yes ~ SD_age + sex + SD10_01,
+    data = .,
+    family = binomial(link = "logit")
+  )
+
+summary(RQ3_T2_join1)
+
+# Calculating Odds Ratio 
+round(
+  exp(cbind(
+    OR = coef(RQ3_T2_join1),
+    confint(RQ3_T2_join1)
+  )),
+  3
+)
